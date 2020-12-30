@@ -22,17 +22,23 @@ jobs:
         uses: actions/setup-go@v2
         with:
           go-version: ${{ matrix.go-version }}
+
       - name: Install dependencies
         run: |
           go version
           go get -u golang.org/x/lint/golint
+
       - name: Run build
         env:
           GOPROXY: "https://proxy.golang.org"
-        run: go build .
+        run: go build -v ./...
+
       - name: Run vet & lint
         env:
           GOPROXY: "https://proxy.golang.org"
         run: |
-          go vet .
-          golint .
+          go vet -v ./...
+          golint -v ./...
+
+        - name: Test
+            run: go test -v ./...
