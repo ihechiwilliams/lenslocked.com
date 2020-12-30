@@ -27,8 +27,12 @@ jobs:
           go version
           go get -u golang.org/x/lint/golint
       - name: Run build
+        env:
+          GOPROXY: "https://proxy.golang.org"
         run: go build .
       - name: Run vet & lint
+        env:
+          GOPROXY: "https://proxy.golang.org"
         run: |
           go vet .
           golint .
