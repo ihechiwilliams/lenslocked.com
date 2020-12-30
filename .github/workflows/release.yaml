@@ -39,9 +39,3 @@ jobs:
         run: |
           go vet -v ./...
           golint -v ./...
-
-      - name: Test
-          env:
-            GOPROXY: "https://proxy.golang.org"
-          run: |
-            go test -v ./...
